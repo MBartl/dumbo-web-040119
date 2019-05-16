@@ -1,4 +1,3 @@
-
 function showMovie(id){
   fetch(`http://localhost:3000/movies/${ id }`)
     .then(res => res.json())
@@ -10,7 +9,17 @@ function slapMovieOnTheDetail(movie){
   detail.querySelector(".year").innerText = movie.year
 }
 
-function onSubmit(event){
+function setupEditButton(){
+  document.getElementById("edit-movie").addEventListener('click', function(){
+    const title = document.querySelector("span.title").innerText
+    const year = document.querySelector("span.year").innerText
+
+    editForm.name.value = title
+    editForm.year.value = year
+  })
+}
+
+function onNewSubmit(event){
   const movieName = newForm.name.value
   const movieYear = newForm.year.value
   event.preventDefault();
@@ -25,7 +34,7 @@ function onSubmit(event){
 }
 
 function bindFormSubmit(){
-  newForm.addEventListener("submit", onSubmit)
+  newForm.addEventListener("submit", onNewSubmit)
 }
 
 function slapMovieOnTheList(movie) {
@@ -53,6 +62,7 @@ document.addEventListener("DOMContentLoaded", function(){
   newForm = document.querySelector(".js-new-movie-form")
   editForm = document.querySelector(".js-edit-movie-form")
 
+  setupEditButton()
   fillMovieList(movieList)
   bindFormSubmit()
 })
