@@ -1,3 +1,16 @@
+
+function setupEditButton(){
+  document.getElementById("js-edit-movie-button").addEventListener("click", function(){
+    // scrape some strings off the dom
+    const title = document.querySelector("span.title").innerText
+    const year = document.querySelector("span.year").innerText
+
+    // populate inputs on edit
+    editForm.name.value = title
+    editForm.year.value = year
+  })
+}
+
 function showMovie(id){
   fetch(`http://localhost:3000/movies/${ id }`)
     .then(res => res.json())
@@ -5,18 +18,29 @@ function showMovie(id){
 }
 
 function slapMovieOnTheDetail(movie){
+  editForm.dataset.movieId = movie.id
   detail.querySelectorAll(".title").forEach((element) => element.innerText = movie.title)
   detail.querySelector(".year").innerText = movie.year
 }
 
-function setupEditButton(){
-  document.getElementById("edit-movie").addEventListener('click', function(){
-    const title = document.querySelector("span.title").innerText
-    const year = document.querySelector("span.year").innerText
+function onEditSubmit(event){
+  event.preventDefault(); // prevents refreshing
+  const updatedMovie = {
+    title: editForm.name.value,
+    year: editForm.year.value
+  }
+  const whichMovieId = editForm.dataset.movieId
+  fetch(`http://localhost:3000/movies/${ whichMovieId }`, {
+    method: "PATCH",
+    headers: {
+    "Content-Type": "application/json", // what we're sending
+    // use "Content-Type" on non-get requests/when you have a body
 
-    editForm.name.value = title
-    editForm.year.value = year
-  })
+    // "Accept": "application/json" // what we're willing to receive
+  },
+    body: JSON.stringify(updatedMovie)
+  }).then(response => response.json())
+  .then(data => slapMovieOnTheDetail(data))
 }
 
 function onNewSubmit(event){
@@ -26,15 +50,19 @@ function onNewSubmit(event){
   fetch("http://localhost:3000/movies", {
     method: "POST",
     headers: {
-    "Content-Type": "application/json",
-    "Accept": "application/json"
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     },
     body: JSON.stringify({ title: movieName, year: movieYear })
   })
 }
 
-function bindFormSubmit(){
+function bindNewFormSubmit(){
   newForm.addEventListener("submit", onNewSubmit)
+}
+
+function bindEditFormSubmit(){
+  editForm.addEventListener("submit", onEditSubmit)
 }
 
 function slapMovieOnTheList(movie) {
@@ -62,7 +90,8 @@ document.addEventListener("DOMContentLoaded", function(){
   newForm = document.querySelector(".js-new-movie-form")
   editForm = document.querySelector(".js-edit-movie-form")
 
-  setupEditButton()
+  setupEditButton();
   fillMovieList(movieList)
-  bindFormSubmit()
+  bindNewFormSubmit()
+  bindEditFormSubmit()
 })

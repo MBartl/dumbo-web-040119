@@ -16,28 +16,29 @@
     {
       "id": 5,
       "title": "Garden State",
-      "year": "2009",
+      "year": "",
       "cast": [
         "Natalie Portman",
         "Zach Braff"
       ]
     },
     {
-      "id": 9,
-      "title": "The Room",
-      "year": "3026",
-      "cast": [
-        "Tommy Wiseau"
-      ]
+      "title": "Undeformed 7: The sequel",
+      "year": "2019",
+      "id": 6,
+      "updatedMovie": {
+        "title": "undoodoo III: The sequel",
+        "year": "2019"
+      }
     },
     {
-      "id": 10,
-      "title": "Yarglebargle II: Electric Bugaloo",
-      "year": "93029",
-      "cast": [
-        "Your uncle",
-        "Jerry"
-      ]
+      "title": "Refactoring",
+      "year": "2019",
+      "id": 7,
+      "updatedMovie": {
+        "title": "Refactoring",
+        "year": "2019"
+      }
     }
   ]
 }
