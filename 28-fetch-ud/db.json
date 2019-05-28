@@ -2,7 +2,7 @@
   "movies": [
     {
       "id": 1,
-      "title": "Spice World",
+      "title": "Spice Wor",
       "year": "1997",
       "cast": [
         "Baby Spice",
@@ -14,9 +14,17 @@
       ]
     },
     {
+      "id": 3,
+      "title": "Ear",
+      "year": "2000",
+      "cast": [
+        "John Travolta"
+      ]
+    },
+    {
       "id": 5,
-      "title": "Garden State",
-      "year": "",
+      "title": "Garden Stat",
+      "year": "2009",
       "cast": [
         "Natalie Portman",
         "Zach Braff"
@@ -39,6 +47,11 @@
         "title": "Refactoring",
         "year": "2019"
       }
+    }
+  ],
+  "spice-girls": [
+    {
+      "name": "sporty"
     }
   ]
 }

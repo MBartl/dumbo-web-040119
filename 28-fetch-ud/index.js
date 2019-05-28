@@ -12,7 +12,11 @@ function setupEditButton(){
 }
 
 function showMovie(id){
-  fetch(`http://localhost:3000/movies/${ id }`)
+  fetch(`http://localhost:3000/movies/${ id }`, {
+    headers: {
+      "Accept": "application/json"
+    },
+  })
     .then(res => res.json())
     .then(slapMovieOnTheDetail)
 }
@@ -29,6 +33,7 @@ function onEditSubmit(event){
     title: editForm.name.value,
     year: editForm.year.value
   }
+<<<<<<< HEAD
   const whichMovieId = editForm.dataset.movieId
   fetch(`http://localhost:3000/movies/${ whichMovieId }`, {
     method: "PATCH",
@@ -41,6 +46,22 @@ function onEditSubmit(event){
     body: JSON.stringify(updatedMovie)
   }).then(response => response.json())
   .then(data => slapMovieOnTheDetail(data))
+=======
+  // console.log(updatedMovie)
+  const whichMovieId = editForm.dataset.movieId;
+
+  fetch(`http://localhost:3000/movies/${ whichMovieId }`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json", //what we're sending
+      // "Accept": "application/json" //what we're willing to recieve
+    },
+    body: JSON.stringify(updatedMovie)
+  }).then(response => response.json())
+    .then(data => slapMovieOnTheDetail(data))
+
+  // slapMovieOnTheDetail(updatedMovie)
+>>>>>>> 28d0b9f363867f04d0b4ec70ddd6b066b1d03ee6
 }
 
 function onNewSubmit(event){
@@ -68,7 +89,9 @@ function bindEditFormSubmit(){
 function slapMovieOnTheList(movie) {
   const li = document.createElement("li")
   li.innerText = movie.title
-  li.addEventListener("click", () => showMovie(movie.id))
+  li.addEventListener("click", function(){ 
+    showMovie(movie.id);
+  })
   li.className = "movie"
   movieList.appendChild(li)
 }
