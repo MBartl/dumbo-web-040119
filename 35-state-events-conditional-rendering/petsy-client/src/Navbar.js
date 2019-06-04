@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react'
+import SearchBar from './SearchBar'
+import AccountControlModule from './AccountControlModule'
 
-export default class Navbar extends Component {
-
-  render() {
+class Navbar extends React.Component {
+  render(){
     return (
-      <div></div>
-    );
+      <div className="navbar">
+        <div>
+          <img className="logo" src="https://image.flaticon.com/icons/png/512/34/34872.png" alt="logo"/>
+        </div>
+        <SearchBar />
+        <AccountControlModule />
+      </div>
+    )
   }
-
 }
+
+export default Navbar
